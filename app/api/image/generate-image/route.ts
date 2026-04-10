@@ -12,7 +12,7 @@ export async function POST(req: NextRequest) {
       model: "stabilityai/stable-diffusion-xl-base-1.0",
       inputs: prompt,
     });
-    console.log("===================");
+
     const blob = new Blob([imageBlob]);
     const arrayBuffer = await blob.arrayBuffer();
     const base64 = Buffer.from(arrayBuffer).toString("base64");
