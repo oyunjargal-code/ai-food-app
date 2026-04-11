@@ -8,9 +8,9 @@ import {
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { RotateCcw, Sparkles } from "lucide-react";
-import TextGenerate from "./_components/textGenerate";
 import IngredientRecognition from "./_components/ingredientRecognition";
 import { GreateImage } from "./_components/greateImage";
+import ImageAnalysis from "./_components/imageAnalysis";
 
 export default function Home() {
   return (
@@ -30,6 +30,7 @@ export default function Home() {
               Image creator
             </TabsTrigger>
           </TabsList>
+
           <TabsContent value="overview">
             <Card>
               <CardHeader>
@@ -53,7 +54,7 @@ export default function Home() {
                 </CardDescription>
               </CardHeader>
               <CardContent className="text-sm text-muted-foreground">
-                <TextGenerate />
+                <ImageAnalysis />
               </CardContent>
             </Card>
           </TabsContent>
@@ -74,6 +75,7 @@ export default function Home() {
               </CardContent>
             </Card>
           </TabsContent>
+
           <TabsContent value="reports">
             <Card>
               <CardHeader>

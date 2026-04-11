@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { LoaderCircle } from "lucide-react";
 
-export default function TextGenerate() {
+export default function ImageAnalysis() {
   const [image, setImage] = useState<string | null>(null);
   const [result, setResult] = useState<string>("");
   const [loading, setLoading] = useState(false);
@@ -22,16 +22,25 @@ export default function TextGenerate() {
   const analyze = async () => {
     if (!image) return;
     setLoading(true);
+    try {
+      const response = await fetch("/api/image/analyze", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ imageUrl: image }),
+      });
 
-    const response = await fetch("/api/image/analyze", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ imageUrl: image }),
-    });
+      if (!response.ok) {
+        const err = await response.json();
+        throw new Error(err.error || "Server error");
+      }
 
-    const data = await response.json();
-    setResult(data.result);
-    setLoading(false);
+      const data = await response.json();
+      setResult(data.result);
+    } catch (error: any) {
+      setResult("Алдаа гарлаа: " + error.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
